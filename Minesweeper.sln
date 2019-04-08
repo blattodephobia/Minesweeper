@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper.Resources", "Minesweeper.Resources\Minesweeper.Resources.csproj", "{8FDB0EE0-7DF0-4D5F-A92C-151D9B2E2982}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper.Extensions", "Minesweeper.Extensions\Minesweeper.Extensions.csproj", "{01EFF0F0-C3DC-448D-BCB6-704B384F810A}"
@@ -8,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper", "Minesweeper\Minesweeper.csproj", "{0724C3E8-7493-4D9B-8B5D-78EBC499EF42}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper.Components", "Minesweeper.Components\Minesweeper.Components.csproj", "{9CA14092-B46A-4A16-A24E-424D0AABE298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper.Tests", "Minesweeper.Tests\Minesweeper.Tests\Minesweeper.Tests.csproj", "{6703B927-BF47-44B1-9254-0B9C0F0A92D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,8 +63,23 @@ Global
 		{9CA14092-B46A-4A16-A24E-424D0AABE298}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9CA14092-B46A-4A16-A24E-424D0AABE298}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9CA14092-B46A-4A16-A24E-424D0AABE298}.Release|x86.ActiveCfg = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Debug|x86.Build.0 = Debug|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{6703B927-BF47-44B1-9254-0B9C0F0A92D8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {163B9B5D-EF44-4A92-B563-AA8337501EB6}
 	EndGlobalSection
 EndGlobal
