@@ -23,7 +23,7 @@ namespace Minesweeper.Components
 				using (HighscoresForm highscoreSelectionForm = new HighscoresForm(activeConfig, currentScore))
 				{
 					highscoreSelectionForm.ShowDialog(invoker);
-					result = highscoreSelectionForm.PlayerName;
+					result = highscoreSelectionForm.ViewModel.PlayerName;
 					if (string.IsNullOrEmpty(result))
 					{
 						result = "Anonymous";

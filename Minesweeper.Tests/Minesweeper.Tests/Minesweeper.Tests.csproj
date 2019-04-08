@@ -54,6 +54,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\HighscoreViewModelTests.cs" />
     <Compile Include="Extensions\PointExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Minesweeper.Components\Minesweeper.Components.csproj">
+      <Project>{9ca14092-b46a-4a16-a24e-424d0aabe298}</Project>
+      <Name>Minesweeper.Components</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Minesweeper.Extensions\Minesweeper.Extensions.csproj">
       <Project>{01eff0f0-c3dc-448d-bcb6-704b384f810a}</Project>
       <Name>Minesweeper.Extensions</Name>

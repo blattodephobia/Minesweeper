@@ -3,6 +3,7 @@ using Minesweeper.Components;
 using Minesweeper.Extensions;
 using System.Collections.Generic;
 using System.Drawing;
+using System;
 
 namespace Minesweeper
 {
@@ -15,6 +16,37 @@ namespace Minesweeper
 			SetHighscoreValues();
 		}
 
+		public HighscoresForm(FieldConfiguration activeConfig, int currentScore) :
+			this()
+		{
+			ActiveConfig = activeConfig;
+			CurrentScore = currentScore;
+
+            TextBox targetTb = null;
+            if (ActiveConfig?.ConfigurationName == FieldConfiguration.BeginnerConfigString)
+            {
+                targetTb = textBoxBeginnerHiScore;
+            }
+            else if (ActiveConfig?.ConfigurationName == FieldConfiguration.IntermediateConfigString)
+            {
+                targetTb = textBoxIntermHiScore;
+            }
+            else if (ActiveConfig?.ConfigurationName == FieldConfiguration.AdvancedConfigString)
+            {
+                targetTb = textBoxAdvancedHiScore;
+            }
+
+            ViewModel = new HighscoreViewModelImpl(this, targetTb) { CanEditPlayerName = true };
+		}
+
+        public HighscoreViewModel ViewModel { get; set; }
+
+		public int Highscore { get; protected set; }
+
+		protected FieldConfiguration ActiveConfig { get; set; }
+
+		protected int CurrentScore { get; set; }
+
 		private void SetHighscoreValues()
 		{
 			labelBeginnerScore.Text = StatisticsTracker.HighscoreBeginner.Key.ToString();
@@ -25,28 +57,12 @@ namespace Minesweeper
 			textBoxAdvancedHiScore.Text = StatisticsTracker.HighscoreAdvanced.Value.ToString();
 		}
 
-		public HighscoresForm(FieldConfiguration activeConfig, int currentScore) :
-			this()
-		{
-			ActiveConfig = activeConfig;
-			CurrentScore = currentScore;
-		}
-
-		public int Highscore { get; protected set; }
-
-		public string PlayerName { get; protected set; }
-
-		protected FieldConfiguration ActiveConfig { get; set; }
-
-		protected int CurrentScore { get; set; }
-
 		private void EnableInputOnNewHighscore()
 		{
 			if (CurrentScore < labelBeginnerScore.Text.ToInt32(999) && ActiveConfig.ConfigurationName == FieldConfiguration.BeginnerConfigString)
 			{
 				textBoxBeginnerHiScore.Enabled = true;
 				labelBeginnerScore.Text = CurrentScore.ToString();
-				textBoxBeginnerHiScore.TextChanged += new System.EventHandler(OnTextChanged);
 				textBoxBeginnerHiScore.SelectionStart = 0;
 				textBoxBeginnerHiScore.SelectionLength = textBoxBeginnerHiScore.Text.Length;
 				textBoxBeginnerHiScore.Focus();
@@ -55,7 +71,6 @@ namespace Minesweeper
 			{
 				textBoxIntermHiScore.Enabled = true;
 				labelIntermediateScore.Text = CurrentScore.ToString();
-				textBoxIntermHiScore.TextChanged += new System.EventHandler(OnTextChanged);
 				textBoxIntermHiScore.SelectionStart = 0;
 				textBoxIntermHiScore.SelectionLength = textBoxBeginnerHiScore.Text.Length;
 				textBoxIntermHiScore.Focus();
@@ -64,21 +79,11 @@ namespace Minesweeper
 			{
 				textBoxAdvancedHiScore.Enabled = true;
 				labelAdvancedScore.Text = CurrentScore.ToString();
-				textBoxAdvancedHiScore.TextChanged += new System.EventHandler(OnTextChanged);
 				textBoxAdvancedHiScore.SelectionStart = 0;
 				textBoxAdvancedHiScore.SelectionLength = textBoxBeginnerHiScore.Text.Length;
 				textBoxAdvancedHiScore.Focus();
 			}
 			labelScoreInputTip.Visible = true;
-		}
-
-		void OnTextChanged(object sender, System.EventArgs e)
-		{
-			TextBox senderTextBox = sender as TextBox;
-			if (senderTextBox != null)
-			{
-				PlayerName = senderTextBox.Text;
-			}
 		}
 
 		private void OnAcceptButtonClick(object sender, System.EventArgs e)

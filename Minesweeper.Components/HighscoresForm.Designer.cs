@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 namespace Minesweeper
 {
 	partial class HighscoresForm
@@ -17,6 +18,7 @@ namespace Minesweeper
 			if (disposing && (components != null))
 			{
 				components.Dispose();
+                (ViewModel as IDisposable)?.Dispose();
 			}
 			base.Dispose(disposing);
 		}

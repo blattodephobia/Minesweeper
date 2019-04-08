@@ -56,6 +56,10 @@
     <Compile Include="HighscoresForm.Designer.cs">
       <DependentUpon>HighscoresForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HighscoresForm.HighscoreViewModelImpl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HighscoreViewModel.cs" />
     <Compile Include="MineCell.cs">
       <SubType>Component</SubType>
     </Compile>
