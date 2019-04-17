@@ -60,12 +60,12 @@ namespace Minesweeper
 
 		private void OnLeaderboardMenuItemClick(object sender, EventArgs e)
 		{
-			StatisticsTracker.ShowLeaderboard(this);
+            StatisticsTracker.Instance.ShowLeaderboard(this);
 		}
 
 		private void OnStatisticsMenuItemClick(object sender, EventArgs e)
 		{
-			StatisticsTracker.ShowStatistics(this);
+            StatisticsTracker.Instance.ShowStatistics(this);
 		}
 
 		private void OnCheatRequested(object sender, EventArgs e)

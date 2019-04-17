@@ -49,12 +49,12 @@ namespace Minesweeper
 
 		private void SetHighscoreValues()
 		{
-			labelBeginnerScore.Text = StatisticsTracker.HighscoreBeginner.Key.ToString();
-			textBoxBeginnerHiScore.Text = StatisticsTracker.HighscoreBeginner.Value.ToString();
-			labelIntermediateScore.Text = StatisticsTracker.HighscoreIntermediate.Key.ToString();
-			textBoxIntermHiScore.Text = StatisticsTracker.HighscoreIntermediate.Value.ToString();
-			labelAdvancedScore.Text = StatisticsTracker.HighscoreAdvanced.Key.ToString();
-			textBoxAdvancedHiScore.Text = StatisticsTracker.HighscoreAdvanced.Value.ToString();
+			labelBeginnerScore.Text = StatisticsTracker.Instance.HighscoreBeginner.Key.ToString();
+			textBoxBeginnerHiScore.Text = StatisticsTracker.Instance.HighscoreBeginner.Value.ToString();
+			labelIntermediateScore.Text = StatisticsTracker.Instance.HighscoreIntermediate.Key.ToString();
+			textBoxIntermHiScore.Text = StatisticsTracker.Instance.HighscoreIntermediate.Value.ToString();
+			labelAdvancedScore.Text = StatisticsTracker.Instance.HighscoreAdvanced.Key.ToString();
+			textBoxAdvancedHiScore.Text = StatisticsTracker.Instance.HighscoreAdvanced.Value.ToString();
 		}
 
 		private void EnableInputOnNewHighscore()

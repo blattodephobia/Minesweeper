@@ -169,7 +169,7 @@ namespace Minesweeper.Components
 
 		protected void OnSpecialActionRequested(EventArgs e = null)
 		{
-			StatisticsTracker.BannedMineFields.Add(ParentField);
+			StatisticsTracker.Instance.BannedMineFields.Add(ParentField);
 			if (SpecialActionRequested != null)
 			{
 				SpecialActionRequested(this, e);

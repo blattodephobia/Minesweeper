@@ -5,9 +5,16 @@ using Minesweeper.Extensions;
 
 namespace Minesweeper.Components
 {
-	public static class StatisticsTracker
+	public class StatisticsTracker
 	{
-		internal static RegistryKey AppRegistryKey
+        private static StatisticsTracker _instance;
+        public static StatisticsTracker Instance
+        {
+            get { return _instance ?? (_instance = new StatisticsTracker()); }
+            set { _instance = value; }
+        }
+
+        internal static RegistryKey AppRegistryKey
 		{
 			get
 			{
@@ -15,7 +22,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		private static string GetPlayerNameOnNewHighScore(FieldConfiguration activeConfig, int currentScore, IWin32Window invoker)
+		private string GetPlayerNameOnNewHighScore(FieldConfiguration activeConfig, int currentScore, IWin32Window invoker)
 		{
 			string result = null;
 			if (NewHighscoreReached(activeConfig, currentScore))
@@ -33,8 +40,8 @@ namespace Minesweeper.Components
 			return result;
 		}
 
-		private static HashSet<IMineField> bannedMineFields;
-		public static HashSet<IMineField> BannedMineFields
+		private HashSet<IMineField> bannedMineFields;
+		public HashSet<IMineField> BannedMineFields
 		{
 			get
 			{
@@ -47,7 +54,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static bool NewHighscoreReached(FieldConfiguration config, int currentScore)
+		public bool NewHighscoreReached(FieldConfiguration config, int currentScore)
 		{
 			bool newHighscoreReached = false;
 
@@ -60,7 +67,7 @@ namespace Minesweeper.Components
 			return newHighscoreReached;
 		}
 
-		public static KeyValuePair<int, string> HighscoreBeginner
+		public KeyValuePair<int, string> HighscoreBeginner
 		{
 			get
 			{
@@ -77,7 +84,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static KeyValuePair<int, string> HighscoreIntermediate
+		public KeyValuePair<int, string> HighscoreIntermediate
 		{
 			get
 			{
@@ -94,7 +101,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static KeyValuePair<int, string> HighscoreAdvanced
+		public KeyValuePair<int, string> HighscoreAdvanced
 		{
 			get
 			{
@@ -111,7 +118,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static void TrySetPlayerNameOnNewHighscore(FieldConfiguration activeConfig, int currentScore, IWin32Window invoker)
+		public void TrySetPlayerNameOnNewHighscore(FieldConfiguration activeConfig, int currentScore, IWin32Window invoker)
 		{
 			string playerName = GetPlayerNameOnNewHighScore(activeConfig, currentScore, invoker);
 			if (playerName != null)
@@ -132,7 +139,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static int GamesWon
+		public int GamesWon
 		{
 			get
 			{
@@ -151,7 +158,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static int GamesPlayed
+		public int GamesPlayed
 		{
 			get
 			{
@@ -170,7 +177,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static int SuccessRate
+		public int SuccessRate
 		{
 			get
 			{
@@ -184,12 +191,12 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static KeyValuePair<int, string> GetHighscoreByConfigName(FieldConfiguration config)
+		public KeyValuePair<int, string> GetHighscoreByConfigName(FieldConfiguration config)
 		{
 			return GetHighscoreByConfigName(config.ConfigurationName);
 		}
 
-		public static KeyValuePair<int, string> GetHighscoreByConfigName(string configName)
+		public KeyValuePair<int, string> GetHighscoreByConfigName(string configName)
 		{
 			if (configName == FieldConfiguration.BeginnerConfigString)
 			{
@@ -209,7 +216,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static void ShowLeaderboard(IWin32Window invoker)
+		public void ShowLeaderboard(IWin32Window invoker)
 		{
 			HighscoresForm leaderboard = new HighscoresForm();
 			if (invoker != null)
@@ -222,7 +229,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public static void ShowStatistics(IWin32Window invoker)
+		public void ShowStatistics(IWin32Window invoker)
 		{
 			string message = string.Format("Games won:\t{0}\nGames played:\t{1}\n----------------------------\nSuccess rate:\t{2}%", GamesWon, GamesPlayed, SuccessRate);
 			MessageBox.Show(invoker, message, "Statistics", MessageBoxButtons.OK);

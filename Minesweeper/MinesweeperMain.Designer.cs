@@ -256,8 +256,8 @@ namespace Minesweeper
 			timerIntervalSeconds.Stop();
 			if (field.GameWon)
 			{
-				StatisticsTracker.GamesWon++;
-				StatisticsTracker.TrySetPlayerNameOnNewHighscore(field.CurrentConfiguration, mineLabelTime.Value, this);
+                StatisticsTracker.Instance.GamesWon++;
+                StatisticsTracker.Instance.TrySetPlayerNameOnNewHighscore(field.CurrentConfiguration, mineLabelTime.Value, this);
 			}
 			toolStripLabelDebugHelper.Text = field.GameWon ? "You win!" : "You lose!";
 		}
@@ -267,7 +267,7 @@ namespace Minesweeper
 			timerIntervalSeconds.Stop();
 			mineLabelTime.Text = "0";
 			timerIntervalSeconds.Start();
-			StatisticsTracker.GamesPlayed++;
+            StatisticsTracker.Instance.GamesPlayed++;
 			toolStripLabelDebugHelper.Text = "Ready";
 		}
 
