@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using Minesweeper.Extensions;
@@ -26,21 +27,30 @@ namespace Minesweeper.Components
 		{
 			string result = null;
 			if (NewHighscoreReached(activeConfig, currentScore))
-			{
-				using (HighscoresForm highscoreSelectionForm = new HighscoresForm(activeConfig, currentScore))
-				{
-					highscoreSelectionForm.ShowDialog(invoker);
-					result = highscoreSelectionForm.ViewModel.PlayerName;
-					if (string.IsNullOrEmpty(result))
-					{
-						result = "Anonymous";
-					}
-				}
-			}
-			return result;
+            {
+                result = EnterPlayerName(activeConfig, currentScore, invoker);
+
+                if (string.IsNullOrEmpty(result))
+                {
+                    throw new Exception("Player name cannot be empty");
+                }
+            }
+            return result;
 		}
 
-		private HashSet<IMineField> bannedMineFields;
+        protected virtual string EnterPlayerName(FieldConfiguration activeConfig, int currentScore, IWin32Window invoker)
+        {
+            string result;
+            using (HighscoresForm highscoreSelectionForm = new HighscoresForm(activeConfig, currentScore))
+            {
+                highscoreSelectionForm.ShowDialog(invoker);
+                result = highscoreSelectionForm.ViewModel.PlayerName;
+            }
+
+            return result;
+        }
+
+        private HashSet<IMineField> bannedMineFields;
 		public HashSet<IMineField> BannedMineFields
 		{
 			get
@@ -54,7 +64,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		public bool NewHighscoreReached(FieldConfiguration config, int currentScore)
+		public virtual bool NewHighscoreReached(FieldConfiguration config, int currentScore)
 		{
 			bool newHighscoreReached = false;
 
