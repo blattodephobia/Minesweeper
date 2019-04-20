@@ -114,14 +114,6 @@ namespace Minesweeper.Extensions
 		}
 	}
 
-	public interface IMineSquare
-	{
-		bool ContainsBomb { get; set; }
-		Point ControlLocation { get; set; }
-		Point FieldLocation { get; set; }
-		EnumerateNeighbouringBombsDelegate NeighbouringBombsEnumerator { get; set; }
-	}
-
 	public static class MineDistributionLogic
 	{
 		private static Random rand;
