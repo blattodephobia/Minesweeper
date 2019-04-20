@@ -183,7 +183,6 @@ namespace Minesweeper
 			// field
 			// 
 			this.field.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.field.GameState = Minesweeper.Components.MinesweeperGameState.Unknown;
 			this.field.Location = new System.Drawing.Point(22, 68);
 			this.field.Name = "field";
 			this.field.Padding = new System.Windows.Forms.Padding(5);
@@ -273,7 +272,7 @@ namespace Minesweeper
 
 		void OnBombsCountChanged(object sender, EventArgs e)
 		{
-			mineLabelBombsCount.Value = field.RemainingBombs;
+			mineLabelBombsCount.Value = field.ViewModel.RemainingBombs;
 		}
 
 		void OnAboutInfoRequested(object sender, EventArgs e)

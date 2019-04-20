@@ -11,9 +11,7 @@ namespace Minesweeper.Components
 	public delegate int SquareOpenedEventHandler(object sender, EventArgs e);
 
 	public enum MineCellCommand { Open, Expand, Defuse };
-
-	public enum MineCellState { Closed, Opened, Exploded, Defused };
-
+    
 	public class MineCell : PictureBox, IMineSquare
 	{
 		private int neighbouringBombsCount;

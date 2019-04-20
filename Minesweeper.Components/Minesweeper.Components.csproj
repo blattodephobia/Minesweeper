@@ -66,6 +66,10 @@
     <Compile Include="MineField.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MineField.MineFieldViewModelImpl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MineFieldViewModel.cs" />
     <Compile Include="MineLabel.cs">
       <SubType>Component</SubType>
     </Compile>
