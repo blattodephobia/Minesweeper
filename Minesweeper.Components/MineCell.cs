@@ -106,7 +106,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		protected void OnStateChanged()
+		protected virtual void OnStateChanged()
 		{
 			if (StateChanged != null)
 			{
@@ -181,7 +181,7 @@ namespace Minesweeper.Components
 			}
 		}
 
-		private void ExecuteCommand(MineCellCommand requestedCommand)
+		protected void ExecuteCommand(MineCellCommand requestedCommand)
 		{
 			if (!Opened)
 			{
@@ -190,17 +190,17 @@ namespace Minesweeper.Components
 					if (ContainsBomb)
 					{
 						State = MineCellState.Exploded;
-					}
+                        return;
+                    }
 					else
 					{
 						Image = numberedSquaresTable[NeighbouringBombsCount];
 						if (NeighbouringBombsCount == 0)
-						{
-							Parent.SuspendLayout();
-							ParentBoard.TryExpandZeroSquares(FieldLocation);
-							Parent.ResumeLayout();
-						}
-					}
+                        {
+                            AutoExpand();
+                        }
+                    }
+                    State = MineCellState.Opened;
 				}
 				else if (requestedCommand == MineCellCommand.Defuse)
 				{
@@ -213,7 +213,14 @@ namespace Minesweeper.Components
 			}
 		}
 
-		protected void OnClickDeprecated(EventArgs e)
+        protected virtual void AutoExpand()
+        {
+            Parent.SuspendLayout();
+            ParentBoard.TryExpandZeroSquares(FieldLocation);
+            Parent.ResumeLayout();
+        }
+
+        protected void OnClickDeprecated(EventArgs e)
 		{
 			MouseEventArgs eventArgs = e as MouseEventArgs;
 			if (!Opened)

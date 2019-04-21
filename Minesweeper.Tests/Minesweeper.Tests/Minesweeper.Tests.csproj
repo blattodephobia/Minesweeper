@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\HighscoreViewModelTests.cs" />
+    <Compile Include="Components\MineCellTests.cs" />
     <Compile Include="Components\MineFieldViewModelTests.cs" />
     <Compile Include="Components\StatisticsTrackerTests.cs" />
     <Compile Include="Extensions\PointExtensionsTests.cs" />
