@@ -12,7 +12,7 @@ namespace Minesweeper.Components
     [TestFixture]
     public class MineFieldViewModelTests
     {
-        private static Mock<IMineSquare>[,] GenerateMockSquares(ushort rows, ushort columns, Action<Mock<IMineSquare>> mockSetup = null)
+        private static Mock<IMineSquare>[,] GenerateMockSquares(int rows, int columns, Action<Mock<IMineSquare>> mockSetup = null)
         {
             var result = new Mock<IMineSquare>[columns, rows];
 
@@ -29,9 +29,9 @@ namespace Minesweeper.Components
             return result;
         }
 
-        private static Mock<IMineSquare>[,] GenerateStraightForwardTestField()
+        private static Mock<IMineSquare>[,] AllocateTestFieldSetupBehavior(FieldConfiguration config = null)
         {
-            return GenerateMockSquares(2, 2, m =>
+            return GenerateMockSquares(config?.Height ?? 2, config?.Width ?? 2, m =>
             {
                 m.SetupAllProperties();
                 m.Object.Enabled = true;
@@ -42,7 +42,7 @@ namespace Minesweeper.Components
         [Test]
         public void DisablesExistingSquaresWhenCellExploded()
         {
-            Mock<IMineSquare>[,] mocks = GenerateStraightForwardTestField();
+            Mock<IMineSquare>[,] mocks = AllocateTestFieldSetupBehavior();
             IMineSquare[,] field = mocks.SelectArray(x => x.Object);
             var vm = new MineFieldViewModel(new FieldConfiguration(), field);
 
@@ -59,14 +59,54 @@ namespace Minesweeper.Components
         [Test]
         public void EndsGameWhenCellExploded()
         {
-            Mock<IMineSquare>[,] mocks = GenerateStraightForwardTestField();
+            var config = new FieldConfiguration() { MinesCount = 1, Width = 2, Height = 2 };
+            Mock<IMineSquare>[,] mocks = AllocateTestFieldSetupBehavior(config);
             IMineSquare[,] field = mocks.SelectArray(x => x.Object);
-            var vm = new MineFieldViewModel(new FieldConfiguration(), field);
+            var vm = new MineFieldViewModel(config, field) { RemainingLives = 0 };
 
             field[0, 0].State = MineCellState.Exploded;
             vm.MineCellStateChanged.Execute(field[0, 0]);
 
             Assert.AreEqual(MinesweeperGameState.GameLost, vm.GameState);
+        }
+
+        [Test]
+        public void DecrementsBombsAndSquaresOnExplosion()
+        {
+            var config = new FieldConfiguration() { MinesCount = 1, Width = 2, Height = 2 };
+            Mock<IMineSquare>[,] mocks = AllocateTestFieldSetupBehavior(config);
+            IMineSquare[,] field = mocks.SelectArray(x => x.Object);
+            var vm = new MineFieldViewModel(config, field);
+
+            field[0, 0].State = MineCellState.Exploded;
+            vm.MineCellStateChanged.Execute(field[0, 0]);
+
+            Assert.AreEqual(0, vm.RemainingBombs);
+            Assert.AreEqual(3, vm.RemainingSquares);
+        }
+
+        [Test]
+        public void ContinuesGameIfLivesRemaining()
+        {
+            Mock<IMineSquare>[,] mocks = AllocateTestFieldSetupBehavior();
+
+            IMineSquare[,] field = mocks.SelectArray(x => x.Object);
+            var vm = new MineFieldViewModel(new FieldConfiguration(), field) { RemainingLives = 1 };
+            field[0, 0].State = MineCellState.Exploded;
+            vm.MineCellStateChanged.Execute(field[0, 0]);
+
+            Assert.AreEqual(0, vm.RemainingLives);
+            Assert.IsTrue(field.OfType<IMineSquare>().All(x => x.Enabled));
+        }
+
+        [Test]
+        public void SetsRemainingBombsAccordingToMinesCount()
+        {
+            Mock<IMineSquare>[,] mocks = AllocateTestFieldSetupBehavior();
+            IMineSquare[,] field = mocks.SelectArray(x => x.Object);
+            var vm = new MineFieldViewModel(new FieldConfiguration() { MinesCount = 1 }, field);
+
+            Assert.AreEqual(1, vm.RemainingBombs);
         }
     }
 }

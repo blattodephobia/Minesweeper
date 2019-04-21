@@ -190,7 +190,6 @@ namespace Minesweeper.Components
 					if (ContainsBomb)
 					{
 						State = MineCellState.Exploded;
-						OnStateChanged();
 					}
 					else
 					{
@@ -202,7 +201,6 @@ namespace Minesweeper.Components
 							Parent.ResumeLayout();
 						}
 					}
-					State = MineCellState.Opened;
 				}
 				else if (requestedCommand == MineCellCommand.Defuse)
 				{

@@ -47,13 +47,24 @@ namespace Minesweeper.Components
         
         public int RemainingBombs { get; protected set; }
 
+        public uint RemainingLives { get; set; }
+
         protected virtual void HandleExplosion()
         {
-            GameState = MinesweeperGameState.GameLost;
-            foreach (IMineSquare mine in _mines)
+            RemainingBombs--;
+            RemainingSquares--;
+            if (RemainingLives == 0)
             {
-                mine.Enabled = false;
-                mine.RevealBomb();
+                GameState = MinesweeperGameState.GameLost;
+                foreach (IMineSquare mine in _mines)
+                {
+                    mine.Enabled = false;
+                    mine.RevealBomb();
+                }
+            }
+            else
+            {
+                RemainingLives--;
             }
         }
 
@@ -96,7 +107,7 @@ namespace Minesweeper.Components
             {
                 foreach (IMineSquare mine in _mines)
                 {
-                    if (mine.State == MineCellState.Closed)
+                    if (mine.State == MineCellState.Closed && mine.State != MineCellState.Defused)
                     {
                         mine.State = MineCellState.Defused;
                     }

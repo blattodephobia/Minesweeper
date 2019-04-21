@@ -135,7 +135,8 @@ namespace Minesweeper.Components
 
                 ViewModel = new MineFieldViewModelImpl(this, CurrentConfiguration, mines)
                 {
-                    GameState = MinesweeperGameState.Unknown
+                    GameState = MinesweeperGameState.Unknown,
+                    RemainingLives = 1
                 };
                 PerformLayout();
 				ResumeLayout();

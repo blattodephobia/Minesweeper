@@ -101,7 +101,7 @@
 		}
 
 		public FieldConfiguration() :
-			this(12, 12, 18, BeginnerConfigString)
+			this(0, 0, 0, CustomConfigString)
 		{
 		}
 
