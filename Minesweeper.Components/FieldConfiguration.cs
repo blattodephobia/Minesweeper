@@ -60,12 +60,15 @@
 
 		public string ConfigurationName { get; private set; }
 
-		private FieldConfiguration(int width, int height, int minesCount, string configurationName)
+        public uint ExtraLives { get; private set; }
+
+		private FieldConfiguration(int width, int height, int minesCount, string configurationName, uint extraLives = 0)
 		{
 			this.width = width;
 			this.height = height;
 			this.minesCount = minesCount;
 			ConfigurationName = configurationName;
+            ExtraLives = extraLives;
 		}
 
 		public static string BeginnerConfigString
@@ -105,8 +108,8 @@
 		{
 		}
 
-		public FieldConfiguration(int width, int height, int minesCount) :
-			this(width, height, minesCount, CustomConfigString)
+		public FieldConfiguration(int width, int height, int minesCount, uint extraLives = 0) :
+			this(width, height, minesCount, CustomConfigString, extraLives)
 		{
 		}
 
@@ -135,7 +138,7 @@
 			{
 				if (beginner == null)
 				{
-					beginner = new FieldConfiguration(13, 13, 16, BeginnerConfigString);
+					beginner = new FieldConfiguration(13, 13, 16, BeginnerConfigString, 1);
 				}
 
 				return beginner;

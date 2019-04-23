@@ -120,6 +120,7 @@ namespace Minesweeper.Components
         {
             RemainingBombs = config.MinesCount;
             RemainingSquares = config.Height * config.Width;
+            RemainingLives = config.ExtraLives;
             MineCellStateChanged = new DelegateCommand(OnMineCellStateChanged);
             _mines = mines;
         }
